@@ -1,0 +1,195 @@
+﻿body {
+    padding-top: 150px;
+    padding-bottom: 20px;
+    background-color: green;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select {
+    max-width: 80px;
+}
+
+textarea {
+    box-sizing: border-box;
+    height: 200px;
+    width: 89%;
+    border-radius: 10px;
+}
+
+.reviewEditor {
+    height: 400px;
+    max-width: 500px;
+}
+
+.platformLabel {
+    width: 100%;
+    text-align: center;
+    font-size: 300%;
+    color: black;
+    font-weight: bold;
+}
+
+.gameTable {
+    border-top: none;
+    color: white;
+}
+
+.thumbCell {
+    width: 130px;
+}
+
+.nameCell a {
+    display: inline-flex;
+    margin: 62px auto;
+    color: white;
+    font-size: 150%;
+}
+
+.nameHeader a {
+    display: inline-flex;
+    margin: 0 auto;
+    color: white;
+    font-size: 150%;
+}
+
+.ratingCell {
+    width: 80px;
+    /*display: inline-flex;*/
+    /*margin: 62px auto;*/
+    font-size: 150%;
+}
+
+    .ratingCell a {
+        color: white;
+    }
+
+    .ratingCell p {
+        display: inline-flex;
+        margin: 60px auto;
+    }
+
+.tableContainer {
+    background-color: black;
+    border-radius: 5px;
+}
+
+.homeLink {
+    margin-top: 25px;
+    font-size: 200%;
+}
+
+.filterList {
+    width: 600px;
+    margin-top: 20px;
+}
+
+.loginLink {
+    height: 30px;
+}
+
+.navbar-nav li {
+    color: white;
+    display: inline-flex;
+}
+
+.navLink {
+    margin-top: 27px;
+    font-size: 140%;
+}
+
+.navbar-nav li label {
+    width: 150px;
+    text-align: right;
+}
+
+.navbar-nav li input {
+    width: 120px;
+    margin-top: 7px;
+}
+
+.navbar-nav li select {
+    width: 127px;
+}
+
+
+
+
+.detailBox {
+    background: black;
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+    .detailBox div {
+        margin-top: 10px;
+        font-size: 120%;
+    }
+
+.hidden {
+    display: none;
+}
+
+.detailLabel {
+    margin: 0;
+    font-size: 50%;
+}
+
+.reviewControl {
+    width: auto;
+}
+
+.reviewText {
+    padding: 0px 30px;
+    text-align: justify;
+}
+
+.reviewNumber p {
+    margin: 0;
+    font-size: 200%;
+}
+
+.reviewBox {
+    margin: 5px;
+}
+
+.reviewBreak {
+    margin: 5px 15px 5px 15px;
+}
+
+.reviewBtn {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+
+footer {
+    background: black;
+    position: fixed;
+    bottom: 0;
+    z-index: 999999;
+    width: 104%;
+    margin-left: -8px;
+    border-top: 3px solid white;
+}
+
+    footer p {
+        color: white;
+        text-align: center;
+        margin-top: 10px;
+    }
