@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using GameReviewApp.CustomAttribute;
 
 namespace GameReviewApp.Controllers
 {
@@ -26,6 +27,7 @@ namespace GameReviewApp.Controllers
         {
         }
 
+        [AuthorizeOrRedirectAttribute(Roles = "Admin")]
         public ActionResult Index()
         {
             var db = new ApplicationDbContext();
@@ -41,6 +43,7 @@ namespace GameReviewApp.Controllers
             return View(model);
         }
 
+        [AuthorizeOrRedirectAttribute(Roles = "Admin")]
         public ActionResult Details(string userName = null)
         {
             var db = new ApplicationDbContext();
@@ -55,7 +58,7 @@ namespace GameReviewApp.Controllers
             return View(model);
         }
 
-
+        [AuthorizeOrRedirectAttribute(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -63,28 +66,58 @@ namespace GameReviewApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserName, FavoriteGame, FavoriteGenre, Email")] CreateUserViewModel user)
+        public async Task<ActionResult> Create([Bind(Include = "UserName, FavoriteGame, FavoriteGenre, Password, ConfirmPassword, Email")] CreateUserViewModel userModel)
         {
             var db = new ApplicationDbContext();
 
             if (ModelState.IsValid)
             {
-                var newUser = new ApplicationUser();
+                var newUser = new ApplicationUser
+                {
+                    UserName = userModel.UserName,
+                    FavoriteGame = userModel.FavoriteGame,
+                    FavoriteGenre = userModel.FavoriteGenre,
+                    Email = userModel.Email
 
-                newUser.UserName = user.UserName;
-                newUser.FavoriteGame = user.FavoriteGame;
-                newUser.FavoriteGenre = user.FavoriteGenre;
-                newUser.Email = user.Email;
+                };
 
-                db.Users.Add(newUser);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var result = await UserManager.CreateAsync(newUser);
+                if (result.Succeeded)
+                {
+                    PasswordHasher ph = new PasswordHasher();
+                    newUser.PasswordHash = ph.HashPassword(userModel.Password);
+                    UserManager.AddToRole(newUser.Id, "Guest");
+                    return RedirectToAction("Index", "Account");
+                }
+                AddErrors(result);
+
             }
 
-            return View(user);
+            return View(userModel);
         }
 
+        //public ActionResult Create([Bind(Include = "UserName, FavoriteGame, FavoriteGenre, Email")] CreateUserViewModel user)
+        //{
+        //    var db = new ApplicationDbContext();
 
+        //    if (ModelState.IsValid)
+        //    {
+        //        var newUser = new ApplicationUser();
+
+        //        newUser.UserName = user.UserName;
+        //        newUser.FavoriteGame = user.FavoriteGame;
+        //        newUser.FavoriteGenre = user.FavoriteGenre;
+        //        newUser.Email = user.Email;
+
+        //        db.Users.Add(newUser);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    return View(user);
+        //}
+
+        [AuthorizeOrRedirectAttribute(Roles = "Admin")]
         public ActionResult Edit(string userName = null)
         {
             if (userName == null)
@@ -106,16 +139,26 @@ namespace GameReviewApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserName, FavoriteGame, FavoriteGenre, Email")] EditUserViewModel userModel)
+        public ActionResult Edit([Bind(Include = "UserName, FavoriteGame, FavoriteGenre, Email, Password, ConfirmPassword")] EditUserViewModel userModel)
         {
             if (ModelState.IsValid)
             {
                 var db = new ApplicationDbContext();
                 var user = db.Users.FirstOrDefault(u => u.UserName == userModel.UserName);
 
-                user.FavoriteGame = userModel.FavoriteGame;
-                user.FavoriteGenre = userModel.FavoriteGenre;
-                user.Email = userModel.Email;
+                if (user != null)
+                {
+                    user.UserName = userModel.UserName;
+                    user.FavoriteGame = userModel.FavoriteGame;
+                    user.FavoriteGenre = userModel.FavoriteGenre;
+                    user.Email = userModel.Email;
+
+                    if (userModel.Password != null)
+                    {
+                        PasswordHasher ph = new PasswordHasher();
+                        user.PasswordHash = ph.HashPassword(userModel.Password);
+                    }
+                }
 
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
@@ -125,6 +168,7 @@ namespace GameReviewApp.Controllers
             return View(userModel);
         }
 
+        [AuthorizeOrRedirectAttribute(Roles = "Admin")]
         public ActionResult Delete(string userName = null)
         {
             var db = new ApplicationDbContext();
@@ -208,7 +252,7 @@ namespace GameReviewApp.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -564,6 +608,7 @@ namespace GameReviewApp.Controllers
 
         #region USER ROLE MANAGEMENT
 
+        [AuthorizeOrRedirectAttribute(Roles = "Admin")]
         public ActionResult ViewUsersRoles(string userName = null)
         {
             if (!string.IsNullOrWhiteSpace(userName))
@@ -594,6 +639,7 @@ namespace GameReviewApp.Controllers
             return View();
         }
 
+        [AuthorizeOrRedirectAttribute(Roles = "Admin")]
         public ActionResult AddRoleToUser(string userName = null)
         {
             List<string> roles;
@@ -663,7 +709,7 @@ namespace GameReviewApp.Controllers
             }
         }
 
-
+        [AuthorizeOrRedirectAttribute(Roles = "Admin")]
         public ActionResult DeleteRoleForUser(string userName = null, string roleName = null)
         {
             if ((!string.IsNullOrWhiteSpace(userName)) || (!string.IsNullOrWhiteSpace(roleName)))

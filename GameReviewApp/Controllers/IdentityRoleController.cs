@@ -7,6 +7,7 @@ using GameReviewApp.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Net;
 using System.Data.Entity;
+using GameReviewApp.CustomAttribute;
 
 namespace GameReviewApp.Controllers
 {
@@ -15,11 +16,13 @@ namespace GameReviewApp.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: IdentityRole
+        [AuthorizeOrRedirectAttribute(Roles = "Admin")]
         public ActionResult Index()
         {
             return View(db.Roles.ToList());
         }
 
+        [AuthorizeOrRedirectAttribute(Roles = "Admin")]
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -34,7 +37,7 @@ namespace GameReviewApp.Controllers
             return View(role);
         }
 
-
+        [AuthorizeOrRedirectAttribute(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -54,6 +57,7 @@ namespace GameReviewApp.Controllers
             return View(role);
         }
 
+        [AuthorizeOrRedirectAttribute(Roles = "Admin")]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -86,6 +90,7 @@ namespace GameReviewApp.Controllers
             return View(role);
         }
 
+        [AuthorizeOrRedirectAttribute(Roles = "Admin")]
         public ActionResult Delete(string id)
         {
             if (id == null)

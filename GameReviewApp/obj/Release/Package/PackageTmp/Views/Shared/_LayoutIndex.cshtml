@@ -6,7 +6,6 @@
     <title>@ViewBag.Title - Game Reviews</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -17,46 +16,47 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Game Reviews", "Index", "Home", new { area = "" }, new { @class = "navbar-brand homeLink" })
+                @Html.ActionLink("Game Reviews", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="navLink">@Html.ActionLink("Game List", "Index", "Games")</li>
-
                 </ul>
-
-
 
 
                 @Html.Partial("_LoginPartial")
 
+                <div class="nav navbar-nav navbar-right filterList">
+                    @*@using (Html.BeginForm())
+                    {*@
+                        <form id="gameFilterForm" action="/Games/Index/gameFilterForm" method="post">
+                            <div id="FilterSearch" class="col-sm-6 form-horizontal">
+                                @Html.Label("Search by Name", htmlAttributes: new { @class = "control-label col-sm-6", @id = "searchLabel" })
+                                @Html.TextBox("searchCriteria", null, new { @class = "form-control col-sm-6" })
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                @Html.Label("Filter by Platform", htmlAttributes: new { @class = "control-label col-sm-6", @id = "filterLabel" })
+                                @Html.DropDownList("platformFilter", new SelectList(ViewBag.Platforms), "All Platforms", new { @class = "form-control col-sm-6" })
+                            </div>
+                        </form>
 
-                <ul class="nav navbar-nav navbar-right filterList">
-                    @using (Html.BeginForm())
-                    {
-                        <li id="FilterSearch" class="form-horizontal">
 
-                            @Html.Label("Search by Name", htmlAttributes: new { @class = "control-label col-md-2" })
-                            @Html.TextBox("searchCriteria", null, new { @class = "form-control" })
-
-                        </li>
-
-                        <li class="form-group">
-                            @Html.Label("Filter by Platform", htmlAttributes: new { @class = "control-label col-md-2" })
-                            @Html.DropDownList("platformFilter", new SelectList(ViewBag.Platforms), "All Platforms", new { @class = "form-control" })
-                        </li>
-
-                    }
-                </ul>
-
+                    @*}*@
+                </div>
 
             </div>
         </div>
     </div>
+
+
+
     <div class="container body-content">
         @RenderBody()
-
     </div>
+
+
+
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

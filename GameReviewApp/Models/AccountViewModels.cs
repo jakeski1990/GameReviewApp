@@ -49,9 +49,8 @@ namespace GameReviewApp.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Username")]
+        public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -141,6 +140,16 @@ namespace GameReviewApp.Models
         [Display(Name = "User Name")]
         public string UserName { get; set; }
 
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm Password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+
         [Required]
         [Display(Name = "Favorite Game")]
         public string FavoriteGame { get; set; }
@@ -168,12 +177,24 @@ namespace GameReviewApp.Models
             this.FavoriteGenre = user.FavoriteGenre;
             this.Email = user.Email;
             this.ReviewCount = user.ReviewCount;
+            this.Password = user.PasswordHash;
         }
 
         [Key]
         [Required]
         [Display(Name = "User Name")]
         public string UserName { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm Password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
 
         [Required]
         [Display(Name = "Favorite Game")]

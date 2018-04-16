@@ -1,54 +1,46 @@
 ﻿@model GameReviewApp.Models.EditUserViewModel
-
-@{ 
+@{
     ViewBag.Title = "Account Details";
 }
-
-<div>
-    <h4>User Details</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FavoriteGame)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FavoriteGame)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FavoriteGenre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FavoriteGenre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ReviewCount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ReviewCount)
-        </dd>
-
-    </dl>
+<div class="contentContainer">
+    <div>
+        <h4>User Details</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.UserName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FavoriteGame)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FavoriteGame)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FavoriteGenre)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FavoriteGenre)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ReviewCount)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ReviewCount)
+            </dd>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { userName = Model.UserName }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { userName = Model.UserName }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

@@ -4,11 +4,13 @@
     ViewBag.Title = "Application Administration";
 }
 
-<h2>Application Administration</h2>
+<div class="contentContainer">
+    <h2 class="contentHeader">Application Administration</h2>
+    <ul>
+        <li>@Html.ActionLink("Manage Games", "AdminIndex", "Games")</li>
+        <li>@Html.ActionLink("Manage Reviews", "Index", "Reviews")</li>
+        <li>@Html.ActionLink("Manage Users", "Index", "Account")</li>
+        <li>@Html.ActionLink("Manage Roles", "Index", "IdentityRole")</li>
+    </ul>
+</div>
 
-<ul>
-    <li>@Html.ActionLink("Manage Games", "AdminIndex", "Games")</li>
-    <li>@Html.ActionLink("Manage Reviews", "Index", "Reviews")</li>
-    <li>@Html.ActionLink("Manage Users", "Index", "Account")</li>
-    <li>@Html.ActionLink("Manage Roles", "Index", "IdentityRole")</li>
-</ul>

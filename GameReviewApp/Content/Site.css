@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 150px;
+    padding-top: 170px;
     padding-bottom: 20px;
     background-color: green;
 }
@@ -20,7 +20,7 @@
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select {
-    max-width: 80px;
+    max-width: 200px;
 }
 
 textarea {
@@ -43,53 +43,137 @@ textarea {
     font-weight: bold;
 }
 
+.table > tbody > tr > th,
+.table > tbody > tr > td {
+    text-align: center;
+    border-top: none;
+}
+
+.contentContainer {
+    border-radius: 20px;
+    background-color: black;
+    margin: auto;
+    margin-bottom: 50px;
+    color: white;
+    padding: 20px;
+}
+
+    .contentContainer input {
+        color: black;
+    }
+
+.contentHeader {
+    color: white;
+}
+
+#RoleName {
+    color: black;
+}
+
+/*.table{
+    color: white;
+}*/
+
+.fullGameTable {
+    border-radius: 20px;
+    background-color: black;
+    margin: auto;
+    margin-bottom: 50px;
+    max-width: 400px;
+}
+
+
+@media (min-width: 768px) {
+    .fullGameTable {
+        min-width: 720px;
+        max-width: initial;
+    }
+}
+
+.fullGameTable .row {
+    margin-bottom: 10px;
+}
+
 .gameTable {
     border-top: none;
     color: white;
 }
 
 .thumbCell {
-    width: 130px;
+    text-align: center;
 }
 
-.nameCell a {
-    display: inline-flex;
-    margin: 62px auto;
-    color: white;
+.nameHeader {
+    text-align: center;
     font-size: 150%;
 }
 
-.nameHeader a {
-    display: inline-flex;
-    margin: 0 auto;
+    .bigSort {
+        color: white;
+        display: none;
+    }
+
+.nameCell {
+    text-align: center;
+    margin-top: 10px;
+}
+
+@media (min-width: 768px) {
+    .nameCell {
+        margin-top: 45px;
+    }
+}
+
+.nameCell a {
     color: white;
     font-size: 150%;
 }
 
 .ratingCell {
-    width: 80px;
-    /*display: inline-flex;*/
-    /*margin: 62px auto;*/
     font-size: 150%;
+    margin: auto;
+    margin-top: 10px;
+    height: 25px;
+    text-align: center;
 }
 
-    .ratingCell a {
-        color: white;
+@media (min-width: 768px) {
+    .ratingCell {
+        margin-top: 45px;
     }
-
-    .ratingCell p {
-        display: inline-flex;
-        margin: 60px auto;
-    }
-
-.tableContainer {
-    background-color: black;
-    border-radius: 5px;
 }
 
-.homeLink {
+.ratingHeader {
+    font-size: 150%;
+    text-align: center;
+}
+
+.ratingCell p {
+}
+
+
+@media (min-width: 768px) {
+    .bigSort {
+        display: initial;
+    }
+}
+
+.smallSort {
+    display: initial;
+    color:white;
+}
+
+@media (min-width: 768px) {
+    .smallSort {
+        display: none;
+    }
+}
+
+
+.navbar-inverse .navbar-brand {
     margin-top: 25px;
     font-size: 200%;
+    color: white;
 }
 
 .filterList {
@@ -101,14 +185,41 @@ textarea {
     height: 30px;
 }
 
+.navbar {
+    background-color: black;
+    border-bottom: 3px solid white;
+}
+
 .navbar-nav li {
     color: white;
     display: inline-flex;
 }
 
-.navLink {
+.navbar-inverse .navbar-nav > li > a {
+    color: white;
     margin-top: 27px;
     font-size: 140%;
+}
+
+#registerLink, #loginLink, #adminLink {
+    font-size: 100%;
+}
+
+#gameFilterForm {
+    padding-top: 20px;
+}
+
+#searchLabel, #filterLabel {
+    color: white;
+    width: auto;
+    padding: 0;
+    padding-right: 10px;
+    text-align: right;
+}
+
+#searchCriteria, #platformFilter {
+    width: 140px;
+    max-width: 140px;
 }
 
 .navbar-nav li label {

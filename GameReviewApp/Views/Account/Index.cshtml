@@ -1,56 +1,55 @@
 ﻿@model IEnumerable<GameReviewApp.Models.EditUserViewModel>
-
-@{ 
+@{
     ViewBag.Title = "User Database";
 }
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FavoriteGame)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FavoriteGenre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReviewCount)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FavoriteGame)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FavoriteGenre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReviewCount)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { userName = item.UserName }) |
-            @Html.ActionLink("Details", "Details", new { userName = item.UserName }) |
-            @Html.ActionLink("Delete", "Delete", new { userName = item.UserName }) |
-            @Html.ActionLink("Roles", "ViewUsersRoles", new { userName = item.UserName })
-        </td>
-    </tr>
-}
-
-</table>
+<div class="contentContainer">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FavoriteGame)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FavoriteGenre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReviewCount)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FavoriteGame)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FavoriteGenre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReviewCount)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { userName = item.UserName }) |
+                    @Html.ActionLink("Details", "Details", new { userName = item.UserName }) |
+                    @Html.ActionLink("Delete", "Delete", new { userName = item.UserName }) |
+                    @Html.ActionLink("Roles", "ViewUsersRoles", new { userName = item.UserName })
+                </td>
+            </tr>
+        }
+    </table>
+</div>

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using GameReviewApp.CustomAttribute;
 using GameReviewApp.Models;
 
 namespace GameReviewApp.Controllers
@@ -15,6 +16,7 @@ namespace GameReviewApp.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Reviews
+        [AuthorizeOrRedirectAttribute(Roles = "Admin,Moderator")]
         public ActionResult Index()
         {
 
@@ -73,6 +75,7 @@ namespace GameReviewApp.Controllers
         }
 
         // GET: Reviews/Edit/5
+        [AuthorizeOrRedirectAttribute(Roles = "Admin,Moderator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -105,6 +108,7 @@ namespace GameReviewApp.Controllers
         }
 
         // GET: Reviews/Delete/5
+        [AuthorizeOrRedirectAttribute(Roles = "Admin,Moderator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
