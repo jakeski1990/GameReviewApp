@@ -232,11 +232,19 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\aco.png" />
+    <Content Include="Images\advert.png" />
     <Content Include="Images\codww2.jpg" />
     <Content Include="Images\destiny.png" />
+    <Content Include="Images\Detroit_Become_Human.jpg" />
     <Content Include="Images\dw9.png" />
+    <Content Include="Images\fc5.png" />
     <Content Include="Images\fortnite.png" />
+    <Content Include="Images\god_of_war_2018.png" />
+    <Content Include="Images\gta5.png" />
+    <Content Include="Images\logo.jpg" />
     <Content Include="Images\mhw.png" />
+    <Content Include="Images\mk8d.png" />
     <Content Include="Images\mnfl18.png" />
     <Content Include="Images\nfsp.png" />
     <Content Include="Images\ptdx.png" />
@@ -245,6 +253,8 @@
     <Content Include="Images\s2.png" />
     <Content Include="Images\sf.jpg" />
     <Content Include="Images\sotc.png" />
+    <Content Include="Images\state_of_decay_2.jpg" />
+    <Content Include="Images\tlg.jpg" />
     <Content Include="Images\w2tnc.png" />
     <Content Include="Images\xc2.jpg" />
     <Content Include="Scripts\bootstrap.js" />
@@ -326,6 +336,7 @@
     <Content Include="Views\Account\ViewUsersRoles.cshtml" />
     <Content Include="Views\Account\AddRoleToUser.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />
+    <Content Include="Views\Shared\_LayoutReviewIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

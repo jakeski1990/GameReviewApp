@@ -11,7 +11,7 @@ namespace GameReviewApp.Models
 
         public int Id { get; set; }
 
-        public int UserId { get; set; }
+        public string ReviewerName { get; set; }
 
         [Required]
         public string Content { get; set; }
@@ -21,6 +21,7 @@ namespace GameReviewApp.Models
         [Required]
         [Range(1, 10,
             ErrorMessage = "Rating must be between 1 and 10")]
+        [Display(Name ="Rating")]
         public int NumRating { get; set; }
 
     }

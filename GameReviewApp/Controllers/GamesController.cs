@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using GameReviewApp.CustomAttribute;
 using GameReviewApp.Models;
+using Microsoft.AspNet.Identity;
 
 namespace GameReviewApp.Controllers
 {
@@ -81,9 +82,10 @@ namespace GameReviewApp.Controllers
 
 
         // GET: Games/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, string sortOrder)
         {
-
+            ICollection<Review> reviews = db.Reviews.ToList();
+            IOrderedEnumerable<Review> sortedReviews; 
 
 
             if (id == null)
@@ -99,11 +101,31 @@ namespace GameReviewApp.Controllers
             }
 
             game.Reviews = db.Reviews.Where(r => r.GameId == game.Id).ToList();
+
+            switch (sortOrder)
+            {
+                case "RatingDesc":
+                    sortedReviews = reviews.OrderByDescending(r => r.NumRating);
+                    game.Reviews = sortedReviews.Where(r => r.GameId == game.Id).ToList();
+                    break;
+                case "RatingAsc":
+                    sortedReviews = reviews.OrderBy(r => r.NumRating);
+                    game.Reviews = sortedReviews.Where(r => r.GameId == game.Id).ToList();
+                    break;
+                default:
+                    game.Reviews = db.Reviews.Where(r => r.GameId == game.Id).ToList();
+                    break;
+            }
+
+
+
             Review review = new Review();
             review.GameId = game.Id;
+
             var detailModel = new GameDetailViewModel {SelectedGame = game, ReviewModel = review };
 
-
+            string reviewerName = User.Identity.GetUserName();
+            ViewBag.ReviewerName = reviewerName;
 
             return View(detailModel);
         }

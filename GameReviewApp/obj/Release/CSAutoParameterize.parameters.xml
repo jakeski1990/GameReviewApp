@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
   <parameter name="GameInfo-Web.config Connection String" description="GameInfo Connection String used in web.config by the application to access the database." defaultValue="Data Source=cit218humlinj2.database.windows.net;&#xD;&#xA;         Initial Catalog=GameInfo;&#xD;&#xA;         User ID=humlinj;&#xD;&#xA;         Password=Moose1995esooM" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\Users\\Jacob\\Desktop\\GameReviewRepos\\GameReviewApp-latest\\GameReviewApp\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='GameInfo']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Jacob\\Desktop\\GameReviewRepos\\GameReviewApp-latest\\GameReviewApp-master\\GameReviewApp\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='GameInfo']/@connectionString" />
   </parameter>
 </parameters>

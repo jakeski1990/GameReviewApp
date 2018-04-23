@@ -1,4 +1,5 @@
 ﻿@model GameReviewApp.Models.IndexViewModel
+@using GameReviewApp.Models
 @{
     ViewBag.Title = "Manage";
 }
@@ -85,3 +86,34 @@
         </dl>
     </div>
 </div>
+@foreach (var item in Model.UserReviews)
+{
+    List<Game> gameList = ViewBag.GameList;
+
+    Game selectedGame = gameList.Where(g => g.Id == item.GameId).ToList().First();
+
+
+
+    <div class="row detailBox reviewBox">
+        <div class="row reviewUsername">
+            @*@item.ReviewerName*@
+            @selectedGame.Name
+            <hr class="reviewBreak" />
+        </div>
+        <div class="row reviewText">
+            @item.Content
+        </div>
+        <div class="row reviewNumber">
+            <hr class="reviewBreak" />
+            <p>@item.NumRating</p>
+        </div>
+        <div class="row">
+            <hr class="reviewBreak" />
+            @Html.ActionLink("Edit", "Edit", "Reviews", new { id = item.Id }, null) |
+            @Html.ActionLink("Details", "Details", "Reviews", new { id = item.Id }, null) |
+            @Html.ActionLink("Delete", "Delete", "Reviews", new { id = item.Id }, null)
+        </div>
+
+    </div>
+
+}

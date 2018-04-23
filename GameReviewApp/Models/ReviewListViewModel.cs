@@ -10,8 +10,7 @@ namespace GameReviewApp.Models
     {
         public int ID { get; set; }
 
-        //TODO: Later replace with UserName
-        public int UserId { get; set; }
+        public string ReviewerName { get; set; }
 
         [Required]
         public string Content { get; set; }

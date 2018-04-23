@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<GameReviewApp.Models.ReviewListViewModel>
 @{
     ViewBag.Title = "Review Database";
+    Layout = "../Shared/_LayoutReviewIndex.cshtml";
 }
 <!DOCTYPE html>
 <html>
@@ -17,13 +18,13 @@
         <table class="table">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.UserId)
+                    @Html.ActionLink(@Html.DisplayNameFor(model => model.ReviewerName).ToHtmlString(), "Index", new { sortOrder = "ReviewerName" })
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Content)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.GameName)
+                    @Html.ActionLink(@Html.DisplayNameFor(model => model.GameName).ToHtmlString(), "Index", new { sortOrder = "GameName" })
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.NumRating)
@@ -34,7 +35,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.UserId)
+                    @Html.DisplayFor(modelItem => item.ReviewerName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Content)

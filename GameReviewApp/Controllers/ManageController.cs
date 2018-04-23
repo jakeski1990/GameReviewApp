@@ -7,6 +7,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using GameReviewApp.Models;
+using Microsoft.AspNet.Identity;
+using System.Collections.Generic;
 
 namespace GameReviewApp.Controllers
 {
@@ -15,6 +17,7 @@ namespace GameReviewApp.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public ManageController()
         {
@@ -64,14 +67,22 @@ namespace GameReviewApp.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+            string reviewerName = User.Identity.GetUserName();
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                UserReviews = db.Reviews.Where(r => r.ReviewerName == reviewerName).ToList()
             };
+
+            List<Game> gameList = db.Games.ToList();
+            ViewBag.GameList = gameList;
+            
+
+
             return View(model);
         }
 

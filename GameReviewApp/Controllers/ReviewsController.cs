@@ -17,11 +17,46 @@ namespace GameReviewApp.Controllers
 
         // GET: Reviews
         [AuthorizeOrRedirectAttribute(Roles = "Admin,Moderator")]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
+            ICollection<ReviewListViewModel> modelList = BuildReviewListViewModelList(db.Reviews.ToList());
+            IOrderedEnumerable<ReviewListViewModel> sortedReviews;
 
-            return View(BuildReviewListViewModelList(db.Reviews.ToList()));
+
+            switch (sortOrder)
+            {
+                case "ReviewerName":
+                    sortedReviews = modelList.OrderBy(m => m.ReviewerName);
+                    break;
+                case "GameName":
+                    sortedReviews = modelList.OrderBy(g => g.GameName);
+                    break;
+                default:
+                    sortedReviews = modelList.OrderBy(g => g.ID);
+                    break;
+            }
+
+
+            return View(sortedReviews);
         }
+
+        [HttpPost]
+        [ActionName("Index")]
+        public ActionResult IndexSearch(string searchCriteria)
+        {
+            IEnumerable<ReviewListViewModel> modelList = BuildReviewListViewModelList(db.Reviews.ToList()) as IList<ReviewListViewModel>;
+
+
+            //Search Function
+            if (searchCriteria != null)
+            {
+                modelList = modelList.Where(g => g.Content.ToUpper().Contains(searchCriteria.ToUpper()));
+            }
+
+
+            return View(modelList);
+        }
+
 
         // GET: Reviews/Details/5
         public ActionResult Details(int? id)
@@ -54,7 +89,7 @@ namespace GameReviewApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,UserId,Content,GameId,NumRating")] Review review, int GameId)
+        public ActionResult Create([Bind(Include = "Id,ReviewerName,Content,GameId,NumRating")] Review review, int GameId)
         {
             if (ModelState.IsValid)
             {
@@ -75,7 +110,7 @@ namespace GameReviewApp.Controllers
         }
 
         // GET: Reviews/Edit/5
-        [AuthorizeOrRedirectAttribute(Roles = "Admin,Moderator")]
+        //[AuthorizeOrRedirectAttribute(Roles = "Admin,Moderator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -96,7 +131,7 @@ namespace GameReviewApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserId,Content,GameId,NumRating")] Review review)
+        public ActionResult Edit([Bind(Include = "Id,ReviewerName,Content,GameId,NumRating")] Review review)
         {
             if (ModelState.IsValid)
             {
@@ -108,7 +143,7 @@ namespace GameReviewApp.Controllers
         }
 
         // GET: Reviews/Delete/5
-        [AuthorizeOrRedirectAttribute(Roles = "Admin,Moderator")]
+        //[AuthorizeOrRedirectAttribute(Roles = "Admin,Moderator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -151,7 +186,7 @@ namespace GameReviewApp.Controllers
             var gameNames = db.Games.ToDictionary(g => g.Id, g => g.Name);
             ReviewListViewModel model = new ReviewListViewModel();
             model.ID = review.Id;
-            model.UserId = review.UserId;
+            model.ReviewerName = review.ReviewerName;
             model.Content = review.Content;
             model.GameId = review.GameId;
             model.GameName = gameNames[review.GameId];

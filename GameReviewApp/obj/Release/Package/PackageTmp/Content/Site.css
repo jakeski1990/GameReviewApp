@@ -23,11 +23,48 @@ select {
     max-width: 200px;
 }
 
+.logo {
+    width: 60px;
+    margin: 10px 10px 0 0px;
+    float: left !important;
+}
+
+@media (max-width: 767px) {
+    .logo {
+        margin: 10px 0px 0 10px;
+    }
+}
+
+@media (max-width: 348px) {
+    .logo {
+        display: none;
+    }
+}
+
+.mobileAds img {
+    display: flex;
+    margin: auto;
+    width: 100%;
+    max-width: 575px;
+    max-height: 350px;
+}
+
+.adLink {
+    text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+    .mobileAds {
+        display: none;
+    }
+}
+
 textarea {
     box-sizing: border-box;
     height: 200px;
     width: 89%;
     border-radius: 10px;
+    color: black;
 }
 
 .reviewEditor {
@@ -66,6 +103,11 @@ textarea {
     color: white;
 }
 
+.sortBar {
+    margin: 5px;
+    border-radius: 10px;
+}
+
 #RoleName {
     color: black;
 }
@@ -86,12 +128,16 @@ textarea {
 @media (min-width: 768px) {
     .fullGameTable {
         min-width: 720px;
-        max-width: initial;
+        max-width: 950px;
     }
 }
 
 .fullGameTable .row {
     margin-bottom: 10px;
+}
+
+.mainAside {
+    margin-left: 10px;
 }
 
 .gameTable {
@@ -108,10 +154,10 @@ textarea {
     font-size: 150%;
 }
 
-    .bigSort {
-        color: white;
-        display: none;
-    }
+.bigSort {
+    color: white;
+    display: none;
+}
 
 .nameCell {
     text-align: center;
@@ -148,8 +194,6 @@ textarea {
     text-align: center;
 }
 
-.ratingCell p {
-}
 
 
 @media (min-width: 768px) {
@@ -160,7 +204,7 @@ textarea {
 
 .smallSort {
     display: initial;
-    color:white;
+    color: white;
 }
 
 @media (min-width: 768px) {
@@ -236,7 +280,11 @@ textarea {
     width: 127px;
 }
 
-
+.contentSearch {
+    margin: 0px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
 
 
 .detailBox {
