@@ -39,5 +39,9 @@ namespace GameReviewApp.Models
         public System.Data.Entity.DbSet<GameReviewApp.Models.Game> Games { get; set; }
 
         public System.Data.Entity.DbSet<GameReviewApp.Models.Review> Reviews { get; set; }
+
+        public System.Data.Entity.DbSet<GameReviewApp.Models.Publisher> Publishers { get; set; }
+
+        public System.Data.Entity.DbSet<GameReviewApp.Models.News> News { get; set; }
     }
 }

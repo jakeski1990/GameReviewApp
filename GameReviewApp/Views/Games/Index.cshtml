@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<GameReviewApp.Models.Game>
 @{
     ViewBag.Title = "Game Index";
-    Layout = "../Shared/_LayoutIndex.cshtml";
+    Layout = "../Shared/_Layout.cshtml";
 }
 <div class="row">
     <div class="col-md-10">
@@ -55,9 +55,18 @@
             </div>
         }
     </div>
-
+    
     <aside class="contentContainer mainAside col-md-2">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et massa eget purus scelerisque molestie ut quis enim. Aliquam augue mauris, lobortis eu vehicula nec, blandit non sapien. Nam eleifend elementum ullamcorper. Cras ac vehicula felis. Aliquam scelerisque vehicula mauris. Nunc iaculis efficitur tellus, condimentum volutpat enim molestie at. Curabitur porttitor leo quis nisi egestas, id porttitor orci scelerisque. Aliquam in eros ut enim ultrices sodales facilisis vel dui. Duis ut felis non lectus fringilla lacinia quis sed dolor.
+        <div class="row">
+            <p class="asideTitle">@ViewBag.SelectedNews.Title</p>
+        </div>
+        <div class="row">
+            <p>@ViewBag.SelectedNews.Content</p>
+        </div>
+        <div class="row">
+            <a href="@ViewBag.SelectedNews.Link">Read More</a>
+            
+        </div>
     </aside>
 
 

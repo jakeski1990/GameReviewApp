@@ -15,6 +15,7 @@ namespace GameReviewApp.Controllers
     public class GamesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private Random rnd = new Random();
 
         // GET: Games
         [HttpGet]
@@ -49,6 +50,10 @@ namespace GameReviewApp.Controllers
                     break;
             }
 
+            IList<News> newsList = db.News.ToList();
+            int ranNum = rnd.Next(newsList.Count);
+            News selectedNews = newsList[ranNum];
+            ViewBag.SelectedNews = selectedNews;
 
             return View(sortedGames);
         }
@@ -147,6 +152,11 @@ namespace GameReviewApp.Controllers
                 db.SaveChanges();
 
                 int? id = detailModel.ReviewModel.GameId;
+
+                string userName = User.Identity.GetUserName();
+                ApplicationUser user = db.Users.Where(u => u.UserName == userName).ToList().FirstOrDefault();
+                user.ReviewCount += 1;
+                db.SaveChanges();
 
                 return RedirectToAction("Details", "Games", new { id });
             }

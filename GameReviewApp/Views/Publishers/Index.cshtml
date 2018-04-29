@@ -1,0 +1,54 @@
+﻿@model IEnumerable<GameReviewApp.Models.Publisher>
+
+@{
+    ViewBag.Title = "Publisher Database";
+    Layout = "../Shared/_Layout.cshtml";
+    string imagePath = "..\\..\\Images\\";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+        <div class="row">
+            <div class="col-md-12 fullGameTable" style="max-width: none;">
+                <div class="row">
+                    <div class="col-sm-3 gameTable thumbHeader">
+                    </div>
+                    <div class="col-sm-5 gameTable nameHeader">
+                        @Html.ActionLink("Name", "Index", new { sortOrder = "PublisherName" }, new { @class = "bigSort" })<p class="bigSort">&#8645</p>
+                    </div>
+                    <div class="col-sm-4 gameTable nameHeader">
+                        @Html.ActionLink("Founding Date", "Index", new { sortOrder = "Founding" }, new { @class = "bigSort" })<p class="bigSort">&#8645</p>
+                    </div>
+                </div>
+                @foreach (var item in Model)
+                {
+                    <div class="row">
+                        <div class="col-sm-3 gameTable thumbCell">
+                            @{
+                                string fullPath = imagePath + item.Logo;
+                            }
+                            <img src="@fullPath" width="128" height="128" alt="Thumbnail" />
+                        </div>
+                        <div class="col-sm-5 gameTable nameCell">
+                            @{
+                                string name = item.Name;
+                            }
+                            @Html.ActionLink(name, "Details", new { id = item.Id })
+                        </div>
+                        <div class="col-sm-4 gameTable ratingCell">
+                            @item.DateFounded.ToString("MMMM dd, yyyy")
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+</body>
+</html>

@@ -23,11 +23,43 @@
                 </a>
                 @Html.ActionLink("Game Reviews", "Index", "Home", new { area = "" }, new { @class = "navbar-brand homeLink" })
             </div>
+
+
+
+
+
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="navLink">@Html.ActionLink("Game List", "Index", "Games")</li>
+                    <li class="navLink">@Html.ActionLink("Games", "Index", "Games")</li>
+                    <li class="navLink">@Html.ActionLink("Publishers", "Index", "Publishers")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
+
+                @{
+                    var controllerName = ViewContext.RouteData.Values["controller"].ToString();
+                    var pageName = ViewContext.RouteData.Values["action"].ToString();
+                }
+                @if (pageName == "Index" || pageName == "AdminIndex")
+                {
+                    switch (controllerName)
+                    {
+                        case "Games":
+                            @Html.Partial("_GameSearchPartial")
+                            break;
+                        case "Reviews":
+                            @Html.Partial("_ReviewSearchPartial")
+                            break;
+                        case "Account":
+                            @Html.Partial("_UserSearchPartial")
+                            break;
+                        case "Publishers":
+                            @Html.Partial("_PublisherSearchPartial")
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
             </div>
         </div>
     </div>

@@ -1,0 +1,13 @@
+﻿
+<div class="nav navbar-nav navbar-right filterList" style="margin-right: -50px;">
+    <form id="gameFilterForm" action="/Games/Index/gameFilterForm" method="post">
+        <div class="col-sm-6 form-horizontal filterSearch">
+            @Html.Label("Search by Name", htmlAttributes: new { @class = "col-sm-6 searchLabel gameSearch"})
+            @Html.TextBox("searchCriteria", null, new { @class = "form-control col-sm-6" })
+        </div>
+        <div class="col-sm-6 form-group filterSearch">
+            @Html.Label("Filter by Platform", htmlAttributes: new { @class = "col-sm-6 filterLabel gameSearch" })
+            @Html.DropDownList("platformFilter", new SelectList(ViewBag.Platforms), "All Platforms", new { @class = "form-control col-sm-6" })
+        </div>
+    </form>
+</div>

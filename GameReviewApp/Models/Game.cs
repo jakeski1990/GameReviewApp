@@ -33,7 +33,6 @@ namespace GameReviewApp.Models
         public string BuyLink { get; set; }
 
         public double Rating { get; set; }
-        //(Reviews.Sum(r => r.NumRating)) / Reviews.Count;
 
 
 

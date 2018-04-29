@@ -88,6 +88,7 @@ namespace GameReviewApp.Models
 
         [Required]
         [Display(Name = "Username")]
+        [MaxLength(15)]
         public string UserName { get; set; }
 
     }

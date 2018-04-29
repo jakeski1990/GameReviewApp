@@ -17,5 +17,15 @@ namespace GameReviewApp
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        protected void Session_Start()
+        {
+            string reviewReturn = "default";
+
+
+            HttpContext.Current.Session.Add("_ReviewReturn",reviewReturn);
+        }
+
+
     }
 }

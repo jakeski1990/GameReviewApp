@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using GameReviewApp.CustomAttribute;
 using GameReviewApp.Models;
+using Microsoft.AspNet.Identity;
 
 namespace GameReviewApp.Controllers
 {
@@ -36,6 +37,7 @@ namespace GameReviewApp.Controllers
                     break;
             }
 
+            this.Session["_ReviewReturn"] = "review";
 
             return View(sortedReviews);
         }
@@ -118,6 +120,11 @@ namespace GameReviewApp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Review review = db.Reviews.Find(id);
+
+            if (User.IsInRole("Admin") || User.IsInRole("Moderator")) ;
+            else if (User.Identity.GetUserName() == review.ReviewerName) ;
+            else return RedirectToAction("AccessDenied", "Error");
+
             ReviewListViewModel reviewListViewModel = BuildReviewListViewModel(review);
             if (review == null)
             {
@@ -137,7 +144,12 @@ namespace GameReviewApp.Controllers
             {
                 db.Entry(review).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                if (this.Session["_ReviewReturn"].ToString() == "manage")
+                {
+                    return RedirectToAction("Index", "Manage");
+                }
+
+                return RedirectToAction("Index", "Reviews");
             }
             return View(review);
         }
@@ -151,6 +163,11 @@ namespace GameReviewApp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Review review = db.Reviews.Find(id);
+
+            if (User.IsInRole("Admin") || User.IsInRole("Moderator"));
+            else if (User.Identity.GetUserName() == review.ReviewerName);
+            else return RedirectToAction("AccessDenied", "Error");
+            
             ReviewListViewModel reviewListViewModel = BuildReviewListViewModel(review);
             if (review == null)
             {
@@ -167,7 +184,13 @@ namespace GameReviewApp.Controllers
             Review review = db.Reviews.Find(id);
             db.Reviews.Remove(review);
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            if (this.Session["_ReviewReturn"].ToString() == "manage")
+            {
+                return RedirectToAction("Index","Manage");
+            }
+
+            return RedirectToAction("Index", "Reviews");
         }
 
         protected override void Dispose(bool disposing)

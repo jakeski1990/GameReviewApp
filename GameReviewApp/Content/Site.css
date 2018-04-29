@@ -1,4 +1,8 @@
-﻿body {
+﻿html {
+    padding-bottom: 50px;
+}
+
+body {
     padding-top: 170px;
     padding-bottom: 20px;
     background-color: green;
@@ -29,18 +33,6 @@ select {
     float: left !important;
 }
 
-@media (max-width: 767px) {
-    .logo {
-        margin: 10px 0px 0 10px;
-    }
-}
-
-@media (max-width: 348px) {
-    .logo {
-        display: none;
-    }
-}
-
 .mobileAds img {
     display: flex;
     margin: auto;
@@ -51,12 +43,6 @@ select {
 
 .adLink {
     text-decoration: underline;
-}
-
-@media (min-width: 768px) {
-    .mobileAds {
-        display: none;
-    }
 }
 
 textarea {
@@ -90,7 +76,7 @@ textarea {
     border-radius: 20px;
     background-color: black;
     margin: auto;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     color: white;
     padding: 20px;
 }
@@ -112,32 +98,34 @@ textarea {
     color: black;
 }
 
-/*.table{
-    color: white;
-}*/
+#RememberMeForm {
+    margin-left: 6px;
+}
 
 .fullGameTable {
     border-radius: 20px;
     background-color: black;
     margin: auto;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
     max-width: 400px;
 }
 
-
-@media (min-width: 768px) {
-    .fullGameTable {
-        min-width: 720px;
-        max-width: 950px;
+    .fullGameTable .row {
+        margin-bottom: 10px;
     }
-}
-
-.fullGameTable .row {
-    margin-bottom: 10px;
-}
 
 .mainAside {
-    margin-left: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    text-align: justify;
+    float: right;
+}
+
+.asideTitle {
+    font-size: 140%;
+    font-weight: bold;
+    text-align: center;
 }
 
 .gameTable {
@@ -164,15 +152,14 @@ textarea {
     margin-top: 10px;
 }
 
-@media (min-width: 768px) {
-    .nameCell {
-        margin-top: 45px;
+    .nameCell a {
+        color: white;
+        font-size: 150%;
     }
-}
 
-.nameCell a {
-    color: white;
-    font-size: 150%;
+.linkCell a {
+    color: #337ab7;
+    font-size: 100%;
 }
 
 .ratingCell {
@@ -183,23 +170,17 @@ textarea {
     text-align: center;
 }
 
-@media (min-width: 768px) {
-    .ratingCell {
-        margin-top: 45px;
-    }
-}
-
 .ratingHeader {
     font-size: 150%;
     text-align: center;
 }
 
-
-
-@media (min-width: 768px) {
-    .bigSort {
-        display: initial;
-    }
+.tableBodyRow {
+    width: 95%;
+    margin: auto;
+    border: 3px solid white;
+    margin-bottom: 10px;
+    border-radius: 10px;
 }
 
 .smallSort {
@@ -207,12 +188,10 @@ textarea {
     color: white;
 }
 
-@media (min-width: 768px) {
-    .smallSort {
-        display: none;
-    }
+#userGreeting {
+    max-width: 173px;
+    max-height: 40px;
 }
-
 
 .navbar-inverse .navbar-brand {
     margin-top: 25px;
@@ -220,9 +199,62 @@ textarea {
     color: white;
 }
 
+.loginContainer {
+    height: 60px;
+    font-size: 130%;
+}
+
+#reviewSearch {
+    margin-right: -45px;
+}
+
+#publisherSearch {
+    margin-right: -24px;
+    margin-top: 10px;
+}
+
+.filterSearch {
+    padding: 0;
+    padding-top: 5px;
+}
+
 .filterList {
-    width: 600px;
-    margin-top: 20px;
+    width: 660px;
+    margin: 0px;
+    margin-top: 10px;
+}
+
+.filterListSmall {
+    width: 300px;
+    margin: 0px;
+}
+
+#gameFilterForm {
+    padding: 0;
+}
+
+.searchLabel, .filterLabel {
+    color: white;
+    width: auto;
+    padding: 0;
+    padding-right: 10px;
+    text-align: right;
+    font-weight: normal;
+    font-size: 140%;
+    margin-top: 3px;
+}
+
+.gameSearch {
+    margin: 0;
+}
+
+#searchCriteria, #platformFilter {
+    width: 140px;
+    max-width: 140px;
+}
+
+.contentSearch {
+    margin: 0px;
 }
 
 .loginLink {
@@ -241,29 +273,13 @@ textarea {
 
 .navbar-inverse .navbar-nav > li > a {
     color: white;
-    margin-top: 27px;
+    margin-top: 0px;
     font-size: 140%;
+    padding: 10px 15px;
 }
 
 #registerLink, #loginLink, #adminLink {
     font-size: 100%;
-}
-
-#gameFilterForm {
-    padding-top: 20px;
-}
-
-#searchLabel, #filterLabel {
-    color: white;
-    width: auto;
-    padding: 0;
-    padding-right: 10px;
-    text-align: right;
-}
-
-#searchCriteria, #platformFilter {
-    width: 140px;
-    max-width: 140px;
 }
 
 .navbar-nav li label {
@@ -279,13 +295,6 @@ textarea {
 .navbar-nav li select {
     width: 127px;
 }
-
-.contentSearch {
-    margin: 0px;
-    margin-top: -10px;
-    margin-bottom: 10px;
-}
-
 
 .detailBox {
     background: black;
@@ -352,3 +361,95 @@ footer {
         text-align: center;
         margin-top: 10px;
     }
+
+
+/*-------------------------------------------------------*/
+/*ALL MEDIA TAGS*/
+/*-------------------------------------------------------*/
+@media (max-width: 767px) {
+    .logo {
+        margin: 10px 0px 0 10px;
+    }
+}
+
+@media (max-width: 348px) {
+    .logo {
+        display: none;
+    }
+}
+
+@media (max-width: 1199px) {
+    #userSearch {
+        margin-right: -30px;
+    }
+}
+
+@media (min-width: 992px) {
+    .col-md-10 {
+        width: 80%;
+    }
+
+    .mainAside {
+        width: 190px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .mainAside {
+        width: 230px;
+    }
+
+    .filterListSmall {
+        padding-top: 30px;
+    }
+
+    #reviewSearch {
+        margin-right: 0px;
+    }
+}
+
+@media (min-width: 768px) {
+    .mobileAds {
+        display: none;
+    }
+
+    .fullGameTable {
+        min-width: 720px;
+        max-width: 950px;
+    }
+
+    .nameCell {
+        margin-top: 45px;
+    }
+
+    .ratingCell {
+        margin-top: 45px;
+    }
+
+    .tableBodyRow {
+        width: auto;
+        margin: auto;
+        border: none;
+        border-radius: 0;
+    }
+
+    .bigSort {
+        display: initial;
+    }
+
+    .smallSort {
+        display: none;
+    }
+
+    .navbar-right {
+        float: right !important;
+        margin-right: -11px;
+    }
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: white;
+        margin-top: 31px;
+        font-size: 140%;
+        padding: 10px 4px;
+    }
+}

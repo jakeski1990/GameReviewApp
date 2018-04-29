@@ -1,16 +1,17 @@
 ﻿
-
 @{
     ViewBag.Title = "Application Administration";
 }
-
 <div class="contentContainer">
     <h2 class="contentHeader">Application Administration</h2>
     <ul>
         <li>@Html.ActionLink("Manage Games", "AdminIndex", "Games")</li>
+        <li>@Html.ActionLink("Manage Publishers", "AdminIndex", "Publishers")</li>
         <li>@Html.ActionLink("Manage Reviews", "Index", "Reviews")</li>
-        <li>@Html.ActionLink("Manage Users", "Index", "Account")</li>
-        <li>@Html.ActionLink("Manage Roles", "Index", "IdentityRole")</li>
+        @if (User.IsInRole("Admin"))
+        {
+            <li>@Html.ActionLink("Manage Users", "Index", "Account")</li>
+            <li>@Html.ActionLink("Manage Roles", "Index", "IdentityRole")</li>
+        }
     </ul>
 </div>
-

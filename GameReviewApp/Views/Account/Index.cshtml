@@ -1,55 +1,124 @@
 ﻿@model IEnumerable<GameReviewApp.Models.EditUserViewModel>
 @{
     ViewBag.Title = "User Database";
+    Layout = "../Shared/_Layout.cshtml";
 }
 <div class="contentContainer">
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FavoriteGame)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FavoriteGenre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReviewCount)
-            </th>
-            <th></th>
-        </tr>
-        @foreach (var item in Model)
-        {
+
+
+    <div class="row">
+        <div class="col-sm-12" style="text-align:center;">
+            @Html.ActionLink("Create New", "Create", null, new { @class = "customButton" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-sm-2 gameTable nameHeader">
+                    @Html.ActionLink(@Html.DisplayNameFor(model => model.UserName).ToHtmlString(), "Index", new { sortOrder = "Name" }, new { @class = "bigSort" })<p class="bigSort">&#8645</p>
+                </div>
+                <div class="col-sm-2 nameHeader">
+                    <p class="bigSort">Favorite Game</p>
+                </div>
+                <div class="col-sm-2 nameHeader">
+                    <p class="bigSort">Favorite Genre</p>
+                </div>
+                <div class="col-sm-2 nameHeader">
+                    <p class="bigSort">Email</p>
+                </div>
+                <div class="col-sm-2 nameHeader">
+                    <p class="bigSort">Total Reviews</p>
+                </div>
+                <div class="col-sm-2 nameHeader">
+
+                </div>
+            </div>
+            @foreach (var item in Model)
+            {
+                <div class="row tableBodyRow">
+                    <div class="col-sm-2 gameTable nameCell">
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </div>
+                    <div class="col-sm-2 nameCell">
+                        @Html.DisplayFor(modelItem => item.FavoriteGame)
+                    </div>
+                    <div class="col-sm-2 nameCell">
+                        @Html.DisplayFor(modelItem => item.FavoriteGenre)
+                    </div>
+                    <div class="col-sm-2 nameCell">
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </div>
+                    <div class="col-sm-2 nameCell">
+                        @Html.DisplayFor(modelItem => item.ReviewCount)
+                    </div>
+                    <div class="col-sm-2 nameCell linkCell">
+                        @Html.ActionLink("Edit", "Edit", new { userName = item.UserName }) |
+                        @Html.ActionLink("Details", "Details", new { userName = item.UserName }) |
+                        @Html.ActionLink("Delete", "Delete", new { userName = item.UserName }) |
+                        @Html.ActionLink("Roles", "ViewUsersRoles", new { userName = item.UserName })
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+    @*<p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FavoriteGame)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FavoriteGenre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReviewCount)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { userName = item.UserName }) |
-                    @Html.ActionLink("Details", "Details", new { userName = item.UserName }) |
-                    @Html.ActionLink("Delete", "Delete", new { userName = item.UserName }) |
-                    @Html.ActionLink("Roles", "ViewUsersRoles", new { userName = item.UserName })
-                </td>
+                <th>
+                    @Html.ActionLink(@Html.DisplayNameFor(model => model.UserName).ToHtmlString(), "Index", new { sortOrder = "Name" })
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FavoriteGame)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FavoriteGenre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReviewCount)
+                </th>
+                <th></th>
             </tr>
-        }
-    </table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FavoriteGame)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FavoriteGenre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReviewCount)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { userName = item.UserName }) |
+                        @Html.ActionLink("Details", "Details", new { userName = item.UserName }) |
+                        @Html.ActionLink("Delete", "Delete", new { userName = item.UserName }) |
+                        @Html.ActionLink("Roles", "ViewUsersRoles", new { userName = item.UserName })
+                    </td>
+                </tr>
+            }
+        </table>*@
 </div>

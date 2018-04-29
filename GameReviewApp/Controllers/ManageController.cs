@@ -55,7 +55,7 @@ namespace GameReviewApp.Controllers
 
         //
         // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        public async Task<ActionResult> Index(ManageMessageId? message, string sortOrder)
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
@@ -68,6 +68,22 @@ namespace GameReviewApp.Controllers
 
             var userId = User.Identity.GetUserId();
             string reviewerName = User.Identity.GetUserName();
+            ICollection<Review> reviews = db.Reviews.Where(r => r.ReviewerName == reviewerName).ToList();
+            IOrderedEnumerable<Review> sortedReviews;
+
+            switch (sortOrder)
+            {
+                case "RatingDesc":
+                    sortedReviews = reviews.OrderByDescending(r => r.NumRating);
+                    break;
+                case "RatingAsc":
+                    sortedReviews = reviews.OrderBy(r => r.NumRating);
+                    break;
+                default:
+                    sortedReviews = reviews.OrderBy(r => r.Id);
+                    break;
+            }
+
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
@@ -75,16 +91,47 @@ namespace GameReviewApp.Controllers
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
-                UserReviews = db.Reviews.Where(r => r.ReviewerName == reviewerName).ToList()
+                UserReviews = sortedReviews.ToList()
             };
 
             List<Game> gameList = db.Games.ToList();
             ViewBag.GameList = gameList;
-            
 
+            this.Session["_ReviewReturn"] = "manage";
 
             return View(model);
         }
+
+        [HttpPost]
+        [ActionName("Index")]
+        public async Task<ActionResult> IndexSearch(string searchCriteria)
+        {
+            IEnumerable<Review> reviewList = db.Reviews.ToList() as IList<Review>;
+
+
+            //Search Function
+            if (searchCriteria != null)
+            {
+                reviewList = reviewList.Where(g => g.Content.ToUpper().Contains(searchCriteria.ToUpper()));
+            }
+
+            var userId = User.Identity.GetUserId();
+            var model = new IndexViewModel
+            {
+                HasPassword = HasPassword(),
+                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+                Logins = await UserManager.GetLoginsAsync(userId),
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                UserReviews = reviewList.ToList()
+            };
+
+            List<Game> gameList = db.Games.ToList();
+            ViewBag.GameList = gameList;
+
+            return View(model);
+        }
+
 
         //
         // POST: /Manage/RemoveLogin

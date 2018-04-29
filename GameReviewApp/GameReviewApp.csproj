@@ -195,6 +195,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IdentityRoleController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\PublishersController.cs" />
     <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="CustomAttribute\AuthorizeOrRedirectAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -219,7 +221,9 @@
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\News.cs" />
     <Compile Include="Models\Platform.cs" />
+    <Compile Include="Models\Publisher.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\ReviewListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -233,7 +237,9 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\aco.png" />
+    <Content Include="Images\activision.jpeg" />
     <Content Include="Images\advert.png" />
+    <Content Include="Images\capcom.png" />
     <Content Include="Images\codww2.jpg" />
     <Content Include="Images\destiny.png" />
     <Content Include="Images\Detroit_Become_Human.jpg" />
@@ -247,14 +253,18 @@
     <Content Include="Images\mk8d.png" />
     <Content Include="Images\mnfl18.png" />
     <Content Include="Images\nfsp.png" />
+    <Content Include="Images\nintendo.gif" />
     <Content Include="Images\ptdx.png" />
     <Content Include="Images\re7.jpg" />
     <Content Include="Images\rottr.png" />
     <Content Include="Images\s2.png" />
     <Content Include="Images\sf.jpg" />
+    <Content Include="Images\sony.png" />
     <Content Include="Images\sotc.png" />
+    <Content Include="Images\squareenix.png" />
     <Content Include="Images\state_of_decay_2.jpg" />
     <Content Include="Images\tlg.jpg" />
+    <Content Include="Images\ubisoft.png" />
     <Content Include="Images\w2tnc.png" />
     <Content Include="Images\xc2.jpg" />
     <Content Include="Scripts\bootstrap.js" />
@@ -314,7 +324,6 @@
     <Content Include="Views\Games\Details.cshtml" />
     <Content Include="Views\Games\Edit.cshtml" />
     <Content Include="Views\Games\Index.cshtml" />
-    <Content Include="Views\Shared\_LayoutIndex.cshtml" />
     <Content Include="Views\Reviews\Create.cshtml" />
     <Content Include="Views\Reviews\Delete.cshtml" />
     <Content Include="Views\Reviews\Details.cshtml" />
@@ -336,7 +345,21 @@
     <Content Include="Views\Account\ViewUsersRoles.cshtml" />
     <Content Include="Views\Account\AddRoleToUser.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />
-    <Content Include="Views\Shared\_LayoutReviewIndex.cshtml" />
+    <Content Include="Views\Shared\_GameSearchPartial.cshtml" />
+    <Content Include="Views\Shared\_ReviewSearchPartial.cshtml" />
+    <Content Include="Views\Shared\_UserSearchPartial.cshtml" />
+    <Content Include="Views\Publishers\Create.cshtml" />
+    <Content Include="Views\Publishers\Delete.cshtml" />
+    <Content Include="Views\Publishers\Details.cshtml" />
+    <Content Include="Views\Publishers\Edit.cshtml" />
+    <Content Include="Views\Publishers\Index.cshtml" />
+    <Content Include="Views\Publishers\AdminIndex.cshtml" />
+    <Content Include="Views\Shared\_PublisherSearchPartial.cshtml" />
+    <Content Include="Views\News\Create.cshtml" />
+    <Content Include="Views\News\Delete.cshtml" />
+    <Content Include="Views\News\Details.cshtml" />
+    <Content Include="Views\News\Edit.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

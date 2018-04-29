@@ -1,0 +1,50 @@
+﻿@model GameReviewApp.Models.Publisher
+
+@{
+    ViewBag.Title = "Publisher Details";
+    Layout = "../Shared/_Layout.cshtml";
+    string imagePath = "..\\..\\Images\\";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+
+    <div class="row detailBox">
+        <div class=" col-md-12">
+            <div class="row" style="font-size: 200%;">
+                @Html.DisplayFor(model => model.Name)
+            </div>
+            <div class="row" style="margin-bottom: 30px;">
+                @{
+            string fullPath = imagePath + Model.Logo;
+                }
+                <img src="@fullPath" width="256" height="256" alt="Thumbnail" />
+            </div>
+        </div>
+    </div>
+
+    @foreach (var item in Model.Games)
+    {
+        <div class="row detailBox reviewBox">
+            <div class="row reviewUsername">
+                @item.Name
+                <hr class="reviewBreak" />
+            </div>
+            <div class="row reviewNumber">
+                <img src="@item.Thumbnail" height="128" width="128" alt="Game Thumbnail" />
+            </div>
+            <div class="row reviewNumber">
+                <hr class="reviewBreak" />
+                <p>@item.Rating</p>
+            </div>
+        </div>
+
+    }
+</body>
+</html>

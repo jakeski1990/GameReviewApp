@@ -20,6 +20,7 @@ namespace GameReviewApp.Controllers
     //[Authorize]
     public class AccountController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -28,13 +29,25 @@ namespace GameReviewApp.Controllers
         }
 
         [AuthorizeOrRedirectAttribute(Roles = "Admin")]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            var db = new ApplicationDbContext();
-            var users = db.Users;
-            var model = new List<EditUserViewModel>();
+            ICollection<ApplicationUser> users = db.Users.ToList();
+            IOrderedEnumerable<ApplicationUser> sortedUsers;
+            List<EditUserViewModel> model = new List<EditUserViewModel>();
 
-            foreach (var user in users)
+
+            switch (sortOrder)
+            {
+                case "Name":
+                   sortedUsers = users.OrderBy(u => u.UserName);
+                    break;
+                default:
+                    sortedUsers = users.OrderBy(u => u.Id);
+                    break;
+            }
+
+
+            foreach (var user in sortedUsers)
             {
                 var u = new EditUserViewModel(user);
                 model.Add(u);
@@ -42,6 +55,31 @@ namespace GameReviewApp.Controllers
 
             return View(model);
         }
+
+        [HttpPost]
+        [ActionName("Index")]
+        public ActionResult IndexSearch(string searchCriteria)
+        {
+            ICollection<ApplicationUser> users = db.Users.ToList();
+            ICollection<EditUserViewModel> model = new List<EditUserViewModel>();
+
+            foreach (var user in users)
+            {
+                var u = new EditUserViewModel(user);
+                model.Add(u);
+            }
+
+            //Search Function
+            if (searchCriteria != null)
+            {
+                model = model.Where(u => u.UserName.ToUpper().Contains(searchCriteria.ToUpper())).ToList();
+            }
+
+
+            return View(model);
+        }
+
+
 
         [AuthorizeOrRedirectAttribute(Roles = "Admin")]
         public ActionResult Details(string userName = null)
@@ -96,28 +134,7 @@ namespace GameReviewApp.Controllers
             return View(userModel);
         }
 
-        //public ActionResult Create([Bind(Include = "UserName, FavoriteGame, FavoriteGenre, Email")] CreateUserViewModel user)
-        //{
-        //    var db = new ApplicationDbContext();
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        var newUser = new ApplicationUser();
-
-        //        newUser.UserName = user.UserName;
-        //        newUser.FavoriteGame = user.FavoriteGame;
-        //        newUser.FavoriteGenre = user.FavoriteGenre;
-        //        newUser.Email = user.Email;
-
-        //        db.Users.Add(newUser);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    return View(user);
-        //}
-
-        [AuthorizeOrRedirectAttribute(Roles = "Admin")]
+        //[AuthorizeOrRedirectAttribute(Roles = "Admin")]
         public ActionResult Edit(string userName = null)
         {
             if (userName == null)
@@ -127,6 +144,11 @@ namespace GameReviewApp.Controllers
 
             var db = new ApplicationDbContext();
             var user = db.Users.FirstOrDefault(u => u.UserName == userName);
+
+            if (User.IsInRole("Admin")) ;
+            else if (User.Identity.GetUserName() == user.UserName) ;
+            else return RedirectToAction("AccessDenied", "Error");
+
             var model = new EditUserViewModel(user);
 
             if (user == null)
@@ -145,6 +167,7 @@ namespace GameReviewApp.Controllers
             {
                 var db = new ApplicationDbContext();
                 var user = db.Users.FirstOrDefault(u => u.UserName == userModel.UserName);
+                if (user == null) user = db.Users.FirstOrDefault(u => u.Email == userModel.Email);
 
                 if (user != null)
                 {
@@ -162,7 +185,7 @@ namespace GameReviewApp.Controllers
 
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect("Index");
             }
 
             return View(userModel);

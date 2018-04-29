@@ -1,0 +1,10 @@
+﻿
+
+<div id="publisherSearch" class="nav navbar-nav navbar-right filterListSmall">
+    <form id="gameFilterForm" action="/Publishers/Index/contentFilterForm" method="post">
+        <div class="col-sm-12 form-group filterSearch">
+            @Html.Label("Search by Name", htmlAttributes: new { @class = "col-sm-6 searchLabel" })
+            @Html.TextBox("searchCriteria", null, new { @class = "form-control col-sm-6 contentSearch" })
+        </div>
+    </form>
+</div>

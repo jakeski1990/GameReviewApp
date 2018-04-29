@@ -45,7 +45,7 @@
 </div>
 
 <div class="contentContainer sortBar">
-    Sort By: @Html.ActionLink("High-to-Low", "Details", new { sortOrder = "RatingDesc" })
+    Sort By: @Html.ActionLink("High-to-Low", "Details", new { sortOrder = "RatingDesc" }) |
     @Html.ActionLink("Low-to-High", "Details", new { sortOrder = "RatingAsc" })
 </div>
 
@@ -69,66 +69,42 @@
 }
 @{string name = User.Identity.GetUserName(); }
 
-@using (Html.BeginForm())
+@if (User.IsInRole("User"))
 {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.ReviewModel.Id, new { htmlAttributes = new { @class = "form-control" } })
-    @Html.EditorFor(model => model.ReviewModel.ReviewerName, new { htmlAttributes = new { @Value = name, @class = "hidden" } })
-    //Can probably remove
-    //Model.ReviewModel.ReviewerName = name;
-
-    @Html.HiddenFor(model => model.ReviewModel.GameId)
 
 
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ReviewModel.Id, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.EditorFor(model => model.ReviewModel.ReviewerName, new { htmlAttributes = new { @Value = name, @class = "hidden" } })
+
+        @Html.HiddenFor(model => model.ReviewModel.GameId)
 
 
+        <div class="form-horizontal row reviewBox detailBox" style="margin-bottom: 50px;">
 
-    <div class="form-horizontal row reviewBox detailBox" style="margin-bottom: 50px;">
+            <div class="form-group row">
+                @Html.TextAreaFor(model => model.ReviewModel.Content, new { htmlAttributes = new { @class = "reviewEditor" } })
+                @Html.ValidationMessageFor(model => model.ReviewModel.Content, "", new { @class = "text-danger" })
+            </div>
 
-        <div class="form-group row">
-            @Html.TextAreaFor(model => model.ReviewModel.Content, new { htmlAttributes = new { @class = "reviewEditor" } })
-            @Html.ValidationMessageFor(model => model.ReviewModel.Content, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="form-group row">
-            <div class="col-md-10">
-                <div class="col-md-11" style="text-align: right;">
-                    <p class="detailLabel">Rating</p>
+            <div class="form-group row">
+                <div class="col-md-10">
+                    <div class="col-md-11" style="text-align: right;">
+                        <p class="detailLabel">Rating</p>
+                    </div>
+                    <div class="col-md-1" style="padding: 0; margin: 0;">
+                        @Html.EditorFor(model => model.ReviewModel.NumRating, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ReviewModel.NumRating, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-                <div class="col-md-1" style="padding: 0; margin: 0;">
-                    @Html.EditorFor(model => model.ReviewModel.NumRating, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ReviewModel.NumRating, "", new { @class = "text-danger" })
+                <div class="col-md-2" style="padding: 0;">
+                    <input type="submit" value="Submit" class="btn btn-default" />
                 </div>
             </div>
-            <div class="col-md-2" style="padding: 0;">
-                <input type="submit" value="Submit" class="btn btn-default" />
-            </div>
+
         </div>
-
-        @*<div class="form-group">
-
-            </div>*@
-
-    </div>
-
-
-
-
-
-
+    }
 }
-
-
-
-
-
-
-@*@Html.Partial("_CreateReviewPartial",Model.ReviewModel )*@
-
-
-
-@*<p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>*@

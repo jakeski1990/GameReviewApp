@@ -18,44 +18,40 @@
                 <dt>
                     @Html.DisplayNameFor(model => model.ReviewerName)
                 </dt>
-
                 <dd>
                     @Html.DisplayFor(model => model.ReviewerName)
                 </dd>
-
                 <dt>
                     @Html.DisplayNameFor(model => model.Content)
                 </dt>
-
                 <dd>
                     @Html.DisplayFor(model => model.Content)
                 </dd>
-
                 <dt>
                     @Html.DisplayNameFor(model => model.GameName)
                 </dt>
-
                 <dd>
                     @Html.DisplayFor(model => model.GameName)
                 </dd>
-
                 <dt>
                     @Html.DisplayNameFor(model => model.NumRating)
                 </dt>
-
                 <dd>
                     @Html.DisplayFor(model => model.NumRating)
                 </dd>
-
             </dl>
-
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
 
                 <div class="form-actions no-color">
                     <input type="submit" value="Delete" class="btn btn-default" /> |
-                    @Html.ActionLink("Back to List", "Index")
+                    @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                    {
+                        @Html.ActionLink("Site Review Management", "Index", "Reviews")
+                        <p style="display:inline"> |</p>
+                    }
+                    @Html.ActionLink("Back to Profile", "Index", "Manage")
                 </div>
             }
         </div>

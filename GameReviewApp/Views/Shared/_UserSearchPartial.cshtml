@@ -1,0 +1,8 @@
+﻿<div id="userSearch" class="nav navbar-nav navbar-right filterListSmall userSearch">
+    <form id="gameFilterForm" action="/Account/Index/contentFilterForm" method="post">
+        <div class="col-sm-12 form-group filterSearch">
+            @Html.Label("Search by Name", htmlAttributes: new { @class = "col-sm-6 searchLabel" })
+            @Html.TextBox("searchCriteria", null, new { @class = "form-control col-sm-6 contentSearch" })
+        </div>
+    </form>
+</div>

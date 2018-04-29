@@ -11,6 +11,7 @@ namespace GameReviewApp.Models
 
         public int Id { get; set; }
 
+        [Display(Name = "User")]
         public string ReviewerName { get; set; }
 
         [Required]

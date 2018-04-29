@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<GameReviewApp.Models.ReviewListViewModel>
 @{
     ViewBag.Title = "Review Database";
-    Layout = "../Shared/_LayoutReviewIndex.cshtml";
+    Layout = "../Shared/_Layout.cshtml";
 }
 <!DOCTYPE html>
 <html>
@@ -12,10 +12,67 @@
 
 <body>
     <div class="contentContainer">
-        @*<p>
-            @Html.ActionLink("Create New", "Create")
-        </p>*@
-        <table class="table">
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-sm-2 gameTable nameHeader">
+                        @Html.ActionLink("User", "Index", new { sortOrder = "ReviewerName" }, new { @class = "bigSort" })<p class="bigSort">&#8645</p>
+                    </div>
+                    <div class="col-sm-4 nameHeader">
+                        <p class="bigSort">Content</p>
+                    </div>
+                    <div class="col-sm-2 nameHeader">
+                        <p class="bigSort">Game</p>
+                    </div>
+                    <div class="col-sm-2 nameHeader">
+                        <p class="bigSort">Rating</p>
+                    </div>
+                    <div class="col-sm-2 nameHeader">
+
+                    </div>
+                </div>
+                @foreach (var item in Model)
+                {
+                    <div class="row tableBodyRow">
+                        <div class="col-sm-2 gameTable nameCell">
+                            @Html.DisplayFor(modelItem => item.ReviewerName)
+                        </div>
+                        <div class="col-sm-4 nameCell">
+                            @if (item.Content.Length > 200)
+                            {
+                                @item.Content.Remove(200, item.Content.Length - 200)<p style="display:inline">.....</p>
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.Content)
+                            }
+                        </div>
+                        <div class="col-sm-2 nameCell">
+                            @Html.DisplayFor(modelItem => item.GameName)
+                        </div>
+                        <div class="col-sm-2 nameCell">
+                            @Html.DisplayFor(modelItem => item.NumRating)
+                        </div>
+                        <div class="col-sm-2 nameCell linkCell">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+        @*<table class="table">
             <tr>
                 <th>
                     @Html.ActionLink(@Html.DisplayNameFor(model => model.ReviewerName).ToHtmlString(), "Index", new { sortOrder = "ReviewerName" })
@@ -32,28 +89,38 @@
                 <th></th>
             </tr>
             @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReviewerName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Content)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GameName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumRating)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                </td>
-            </tr>
-    }
-        </table>
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReviewerName)
+                    </td>
+                    <td>
+                        @if (item.Content.Length > 200)
+                        {
+                            @item.Content.Remove(200, item.Content.Length - 200)<p style="display:inline">.....</p>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Content)
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GameName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumRating)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    </td>
+                </tr>
+            }
+        </table>*@
+
+
+
     </div>
 </body>
 
